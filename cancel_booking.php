@@ -63,8 +63,8 @@ if (isset($_POST['cancel_booking_id']) && isset($_POST['confirm_cancel'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cancella Prenotazione - Old School Barber</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Cancella Prenotazione - Bella Vista Hair Salon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -75,21 +75,21 @@ if (isset($_POST['cancel_booking_id']) && isset($_POST['confirm_cancel'])) {
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 30%, #f3e8ff 70%, #e0e7ff 100%);
             min-height: 100vh;
-            color: #ffffff;
+            color: #374151;
             padding: 1rem;
         }
 
         .container {
             max-width: 600px;
             margin: 2rem auto;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(20px);
             border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.1);
             padding: 3rem 2.5rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 25px 50px rgba(236, 72, 153, 0.1);
         }
 
         .header {
@@ -106,27 +106,29 @@ if (isset($_POST['cancel_booking_id']) && isset($_POST['confirm_cancel'])) {
 
         .logo i {
             font-size: 2.5rem;
-            color: #d4af37;
+            color: #ec4899;
         }
 
         .logo h1 {
+            font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
+            font-weight: 700;
+            background: linear-gradient(135deg, #ec4899, #be185d);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .title {
+            font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             font-weight: 700;
-            color: #ffffff;
+            color: #1f2937;
             margin-bottom: 0.5rem;
         }
 
         .subtitle {
-            color: #a0a0a0;
+            color: #6b7280;
             font-size: 0.95rem;
         }
 
@@ -137,7 +139,7 @@ if (isset($_POST['cancel_booking_id']) && isset($_POST['confirm_cancel'])) {
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: #e0e0e0;
+            color: #374151;
             font-weight: 500;
         }
 
@@ -150,30 +152,30 @@ if (isset($_POST['cancel_booking_id']) && isset($_POST['confirm_cancel'])) {
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: #a0a0a0;
+            color: #ec4899;
             font-size: 1rem;
         }
 
         input[type="email"] {
             width: 100%;
             padding: 1rem 1rem 1rem 3rem;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(236, 72, 153, 0.2);
             border-radius: 12px;
-            color: #ffffff;
+            color: #374151;
             font-size: 1rem;
             transition: all 0.3s ease;
         }
 
         input[type="email"]:focus {
             outline: none;
-            border-color: #d4af37;
-            background: rgba(255, 255, 255, 0.12);
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+            border-color: #ec4899;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.1);
         }
 
         input[type="email"]::placeholder {
-            color: #a0a0a0;
+            color: #9ca3af;
         }
 
         .btn {
@@ -194,8 +196,8 @@ if (isset($_POST['cancel_booking_id']) && isset($_POST['confirm_cancel'])) {
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
-            color: #1a1a2e;
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            color: white;
         }
 
         .btn-danger {
@@ -204,14 +206,14 @@ if (isset($_POST['cancel_booking_id']) && isset($_POST['confirm_cancel'])) {
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(236, 72, 153, 0.1);
+            color: #ec4899;
+            border: 1px solid rgba(236, 72, 153, 0.2);
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
         }
 
         .bookings-list {
@@ -219,16 +221,17 @@ if (isset($_POST['cancel_booking_id']) && isset($_POST['confirm_cancel'])) {
         }
 
         .booking-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 12px;
             padding: 1.5rem;
             margin-bottom: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.1);
             transition: all 0.3s ease;
         }
 
         .booking-card:hover {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 8px 25px rgba(236, 72, 153, 0.1);
         }
 
         .booking-info {
@@ -239,13 +242,13 @@ if (isset($_POST['cancel_booking_id']) && isset($_POST['confirm_cancel'])) {
         }
 
         .booking-details h4 {
-            color: #d4af37;
+            color: #ec4899;
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
         }
 
         .booking-details p {
-            color: #a0a0a0;
+            color: #6b7280;
             font-size: 0.9rem;
             margin-bottom: 0.3rem;
         }
@@ -261,18 +264,18 @@ if (isset($_POST['cancel_booking_id']) && isset($_POST['confirm_cancel'])) {
 
         .status.confermata {
             background: rgba(34, 197, 94, 0.2);
-            color: #4ade80;
+            color: #059669;
         }
 
         .status.in-attesa {
             background: rgba(251, 191, 36, 0.2);
-            color: #fbbf24;
+            color: #d97706;
         }
 
         .cancel-btn {
             padding: 0.5rem 1rem;
             background: rgba(239, 68, 68, 0.2);
-            color: #f87171;
+            color: #dc2626;
             border: 1px solid rgba(239, 68, 68, 0.3);
             border-radius: 8px;
             font-size: 0.8rem;
@@ -295,30 +298,30 @@ if (isset($_POST['cancel_booking_id']) && isset($_POST['confirm_cancel'])) {
         .message.success {
             background: rgba(34, 197, 94, 0.1);
             border: 1px solid rgba(34, 197, 94, 0.3);
-            color: #4ade80;
+            color: #059669;
         }
 
         .message.error {
             background: rgba(239, 68, 68, 0.1);
             border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #f87171;
+            color: #dc2626;
         }
 
         .message.info {
             background: rgba(59, 130, 246, 0.1);
             border: 1px solid rgba(59, 130, 246, 0.3);
-            color: #60a5fa;
+            color: #2563eb;
         }
 
         .back-link {
             text-align: center;
             margin-top: 2rem;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(236, 72, 153, 0.1);
         }
 
         .back-link a {
-            color: #a0a0a0;
+            color: #6b7280;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
@@ -328,7 +331,7 @@ if (isset($_POST['cancel_booking_id']) && isset($_POST['confirm_cancel'])) {
         }
 
         .back-link a:hover {
-            color: #d4af37;
+            color: #ec4899;
         }
 
         @media (max-width: 768px) {
@@ -358,8 +361,8 @@ if (isset($_POST['cancel_booking_id']) && isset($_POST['confirm_cancel'])) {
     <div class="container">
         <div class="header">
             <div class="logo">
-                <i class="fas fa-cut"></i>
-                <h1>Old School Barber</h1>
+                <i class="fas fa-spa"></i>
+                <h1>Bella Vista</h1>
             </div>
             <h2 class="title">Cancella Prenotazione</h2>
             <p class="subtitle">Inserisci la tua email per visualizzare le prenotazioni attive</p>
