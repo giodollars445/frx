@@ -766,16 +766,6 @@
                         </label>
                         <select id="servizio" name="servizio" required>
                             <option value="">Seleziona un servizio</option>
-                            <option value="Taglio e Piega">Taglio e Piega</option>
-                            <option value="Colore">Colore</option>
-                            <option value="Meches">Meches</option>
-                            <option value="Trattamento Ricostruttivo">Trattamento Ricostruttivo</option>
-                            <option value="Piega">Solo Piega</option>
-                            <option value="Taglio">Solo Taglio</option>
-                            <option value="Trattamento Anticaduta">Trattamento Anticaduta</option>
-                            <option value="Acconciatura Sposa">Acconciatura Sposa</option>
-                            <option value="Extension">Extension</option>
-                            <option value="Permanente">Permanente</option>
                         </select>
                     </div>
 
@@ -822,48 +812,8 @@
                 <p>Scopri tutti i trattamenti disponibili nel nostro salone</p>
             </div>
 
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-cut"></i>
-                    <h4>Taglio e Styling</h4>
-                    <p>Tagli moderni e classici, personalizzati secondo il tuo stile e la forma del viso</p>
-                    <div class="service-price">da €35</div>
-                </div>
-
-                <div class="service-card">
-                    <i class="fas fa-palette"></i>
-                    <h4>Colorazione</h4>
-                    <p>Colori naturali e fashion, meches, balayage e tecniche innovative</p>
-                    <div class="service-price">da €50</div>
-                </div>
-
-                <div class="service-card">
-                    <i class="fas fa-magic"></i>
-                    <h4>Trattamenti</h4>
-                    <p>Ricostruzione, idratazione profonda e trattamenti specifici per ogni tipo di capello</p>
-                    <div class="service-price">da €40</div>
-                </div>
-
-                <div class="service-card">
-                    <i class="fas fa-crown"></i>
-                    <h4>Acconciature</h4>
-                    <p>Pieghe eleganti, acconciature per eventi speciali e matrimoni</p>
-                    <div class="service-price">da €45</div>
-                </div>
-
-                <div class="service-card">
-                    <i class="fas fa-sparkles"></i>
-                    <h4>Extension</h4>
-                    <p>Allungamento e infoltimento con extension di alta qualità</p>
-                    <div class="service-price">da €80</div>
-                </div>
-
-                <div class="service-card">
-                    <i class="fas fa-leaf"></i>
-                    <h4>Trattamenti Bio</h4>
-                    <p>Prodotti naturali e biologici per il benessere dei tuoi capelli</p>
-                    <div class="service-price">da €55</div>
-                </div>
+            <div class="services-grid" id="servicesGrid">
+                <!-- Services will be loaded dynamically -->
             </div>
         </section>
     </div>
@@ -912,14 +862,74 @@
         let selectedTimeSlot = null;
         let availableTimeSlots = [];
 
-        // Load operators on page load
+        // Load data on page load
         document.addEventListener('DOMContentLoaded', function() {
+            loadServices();
             loadOperators();
             
             // Set minimum date to today
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('data_prenotazione').setAttribute('min', today);
         });
+
+        // Load services
+        function loadServices() {
+            fetch('get_services.php')
+                .then(response => response.json())
+                .then(data => {
+                    const serviceSelect = document.getElementById('servizio');
+                    serviceSelect.innerHTML = '<option value="">Seleziona un servizio</option>';
+                    
+                    data.forEach(service => {
+                        const option = document.createElement('option');
+                        option.value = service.nome;
+                        option.textContent = service.nome;
+                        serviceSelect.appendChild(option);
+                    });
+
+                    // Also update services grid
+                    updateServicesGrid(data);
+                })
+                .catch(error => {
+                    console.error('Error loading services:', error);
+                    showMessage('Errore nel caricamento dei servizi.', 'error');
+                });
+        }
+
+        // Update services grid
+        function updateServicesGrid(services) {
+            const servicesGrid = document.getElementById('servicesGrid');
+            servicesGrid.innerHTML = '';
+
+            const serviceIcons = {
+                'Taglio e Piega': 'fas fa-cut',
+                'Colore': 'fas fa-palette',
+                'Meches': 'fas fa-magic',
+                'Trattamento Ricostruttivo': 'fas fa-leaf',
+                'Piega': 'fas fa-wind',
+                'Taglio': 'fas fa-scissors',
+                'Trattamento Anticaduta': 'fas fa-seedling',
+                'Acconciatura Sposa': 'fas fa-crown',
+                'Extension': 'fas fa-sparkles',
+                'Permanente': 'fas fa-sync-alt'
+            };
+
+            services.forEach(service => {
+                const serviceCard = document.createElement('div');
+                serviceCard.className = 'service-card';
+                
+                const icon = serviceIcons[service.nome] || 'fas fa-spa';
+                
+                serviceCard.innerHTML = `
+                    <i class="${icon}"></i>
+                    <h4>${service.nome}</h4>
+                    <p>Servizio professionale di alta qualità per la cura e la bellezza dei tuoi capelli</p>
+                    <div class="service-price">€${parseFloat(service.prezzo).toFixed(2)}</div>
+                `;
+                
+                servicesGrid.appendChild(serviceCard);
+            });
+        }
 
         // Load operators
         function loadOperators() {
